@@ -10,8 +10,17 @@ public class SpaForwardController {
 
     @GetMapping(value = {
             "/",
-            "/{path:^(?!api$|error$)[^.]+}",
-            "/{path:^(?!api$|error$)[^.]+}/**/{subpath:[^.]+}"
+            "/login",
+            "/register",
+            "/library",
+            "/subscription",
+            "/admin",
+            "/admin/books",
+            "/admin/orders",
+            "/admin/users",
+            "/admin/payments",
+            "/books/{bookId}",
+            "/reader/{bookId}"
     })
     public String forwardToIndex() {
         return "forward:/index.html";
