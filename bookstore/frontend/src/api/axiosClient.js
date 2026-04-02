@@ -1,8 +1,29 @@
 import axios from "axios";
 import { clearSession, loadToken } from "../utils/storage";
 
+function resolveApiBaseUrl() {
+  const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+
+  if (!configuredBaseUrl) {
+    return "";
+  }
+
+  if (typeof window === "undefined") {
+    return configuredBaseUrl;
+  }
+
+  const isLocalHost = /^(localhost|127\.0\.0\.1)$/i.test(window.location.hostname);
+  const pointsToLocalBackend = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(configuredBaseUrl);
+
+  if (!isLocalHost && pointsToLocalBackend) {
+    return "";
+  }
+
+  return configuredBaseUrl;
+}
+
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "",
+  baseURL: resolveApiBaseUrl(),
   timeout: 10000,
 });
 
