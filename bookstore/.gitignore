@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+.metadata/
+node_modules/
+.env
