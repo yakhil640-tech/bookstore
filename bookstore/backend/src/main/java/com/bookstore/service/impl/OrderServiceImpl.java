@@ -117,7 +117,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(readOnly = true)
     public List<Order> getCompletedOrdersByUserId(Long userId) {
         logger.debug("Fetching completed orders for user id: {}", userId);
-        return orderRepository.findByPurchaserIdAndStatusOrderByOrderedAtDesc(userId, OrderStatus.COMPLETED);
+        return orderRepository.findCompletedOrdersWithItemsByPurchaserId(userId, OrderStatus.COMPLETED);
     }
 
     private void validateBookAvailability(Book book) {
