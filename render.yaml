@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: bookstore-app
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: render
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bookstore-postgres
+          property: connectionString
+      - key: APP_JWT_SECRET
+        generateValue: true
+
+databases:
+  - name: bookstore-postgres
+    databaseName: bookstore
+    plan: free

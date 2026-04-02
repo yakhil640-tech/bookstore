@@ -1,0 +1,9 @@
+.git
+.metadata
+**/node_modules
+**/target
+**/*.err
+**/*.log
+**/*.bat
+bookstore/backend/bookstore_local.mv.db
+bookstore/backend/src/main/resources/static
